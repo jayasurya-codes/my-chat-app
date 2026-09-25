@@ -1,0 +1,147 @@
+# ==========================================
+# 1. Environment Variables & Secrets (CRITICAL)
+# ==========================================
+# Exclude all env files across root, frontend, backend, and infrastructure
+*.env
+*.env.*
+*.env.local
+*.env.development.local
+*.env.test.local
+*.env.production.local
+
+# Explicitly allow safe example templates so team members know required keys
+!.env.example
+!.env.template
+
+# Secret Keys & Credentials
+*.pem
+*.key
+*.crt
+*.pfx
+*.p12
+*.cer
+secrets/
+certs/
+id_rsa*
+
+# ==========================================
+# 2. Database & Persistent Data
+# ==========================================
+# Exclude local database dumps, storage mounts, and embedded databases
+*.sqlite
+*.sqlite3
+*.db
+postgres_data/
+postgres_auth_data/
+postgres_chat_data/
+redis_data/
+*.rdb
+*.dump
+
+# ==========================================
+# 3. Node.js & JavaScript Packages
+# ==========================================
+# Dependencies
+node_modules/
+jspm_packages/
+
+# Package Manager Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-debug.log*
+lerna-debug.log*
+
+# Framework Caches & Build Outputs
+.next/
+.nuxt/
+.svelte-kit/
+.astro/
+.output/
+dist/
+build/
+out/
+.vite/
+.cache/
+.parcel-cache/
+
+# TypeScript Cache
+*.tsbuildinfo
+
+# Diagnostics / Testing
+coverage/
+.nyc_output/
+.playwright/
+cypress/screenshots/
+cypress/videos/
+
+# ==========================================
+# 4. Python (If using Python Backend)
+# ==========================================
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+env/
+.pytest_cache/
+.mypy_cache/
+
+# ==========================================
+# 5. Go / Compiled Binaries (If using Go Backend)
+# ==========================================
+*.exe
+*.exe;
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# ==========================================
+# 6. Docker & Infrastructure
+# ==========================================
+# Local Docker volumes and override files
+docker-compose.override.yml
+.docker/
+
+# ==========================================
+# 7. OS-Specific Files (macOS & Windows)
+# ==========================================
+# macOS clutter
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+
+# Windows clutter
+Thumbs.db
+Desktop.ini
+
+# ==========================================
+# 8. IDE & Code Editors
+# ==========================================
+# VS Code (ignore workspace state, keep useful shared configs)
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# JetBrains / IntelliJ / WebStorm
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# Vim & Other Editors
+*.swp
+*.swo
+*~
+.project
+.settings/
