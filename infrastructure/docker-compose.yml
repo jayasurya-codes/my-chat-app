@@ -1,0 +1,70 @@
+name: my-chat-app
+
+version: '3.8'
+
+services:
+  # 1. PostgreSQL Database for Auth Service
+  postgres-auth:
+    image: postgres:15-alpine
+    container_name: postgres-auth
+    environment:
+      POSTGRES_DB: auth_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgrespassword
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_auth_data:/var/lib/postgresql/data
+    networks:
+      - chat-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d auth_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # 2. PostgreSQL Database for Chat Service
+  postgres-chat:
+    image: postgres:15-alpine
+    container_name: postgres-chat
+    environment:
+      POSTGRES_DB: chat_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgrespassword
+    ports:
+      - "5433:5432" # Mapped to host port 5433 to avoid collision with auth DB
+    volumes:
+      - postgres_chat_data:/var/lib/postgresql/data
+    networks:
+      - chat-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d chat_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # 3. Redis In-Memory Store (Presence & Session State)
+  redis:
+    image: redis:7-alpine
+    container_name: redis-presence
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - chat-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_auth_data:
+  postgres_chat_data:
+  redis_data:
+
+networks:
+  chat-network:
+    name: chat-network
+    driver: bridge
