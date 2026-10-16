@@ -30,8 +30,8 @@ public class FriendRequest {
     @Column(name = "sender_id", nullable = false)
     private UUID senderId;
 
-    @Column(name= "reciver_id", nullable = false)
-    private UUID reciverId;
+    @Column(name= "receiver_id", nullable = false)
+    private UUID receiverId;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -40,8 +40,8 @@ public class FriendRequest {
     @Column(name = "created_at", nullable = false, updatable = false)
     private Instant createdAt;
 
-    public FriendRequest(UUID senderId, UUID reciverId) {
+    public FriendRequest(UUID senderId, UUID receiverId) {
         this.senderId = senderId;
-        this.reciverId = reciverId;
+        this.receiverId = receiverId;
     }
 }
